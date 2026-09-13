@@ -1,36 +1,154 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Mukhammad Raihan Apriliansyah
 
-## Getting Started
+Website portfolio pribadi yang dibuat menggunakan Next.js, TypeScript, dan Tailwind CSS. Website ini digunakan untuk menampilkan informasi diri, skills, dan project yang pernah dibuat, serta informasi kontak.
 
-First, run the development server:
+## Tentang Project
+
+Portfolio ini dibuat sebagai project pembelajaran web development. Website dirancang dengan tampilan modern, responsive, dan mudah digunakan pada berbagai ukuran layar.
+
+Di dalam website terdapat beberapa bagian utama, yaitu:
+
+- Home
+- About
+- Skills
+- Projects
+- Journey
+- Contact
+
+Selain halaman utama, terdapat halaman khusus untuk menampilkan seluruh project dan halaman detail untuk setiap project.
+
+## Teknologi yang Digunakan
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Lucide React
+
+## Fitur
+
+Beberapa fitur yang terdapat pada website:
+
+- Responsive design
+- Navbar dengan mobile menu
+- Animasi menggunakan Framer Motion
+- Pencarian project berdasarkan judul
+- Filter project berdasarkan kategori
+- Filter Featured Project
+- Halaman semua project
+- Halaman detail project
+- Dynamic routing
+- Halaman 404
+- Counter apresiasi
+- Navigasi antar halaman
+
+## Struktur Component
+
+Project menggunakan component agar kode lebih terstruktur dan mudah dikembangkan.
+
+Beberapa component yang digunakan:
+
+- `Navbar.tsx` untuk navigasi website
+- `Hero.tsx` untuk bagian utama halaman
+- `About.tsx` untuk informasi tentang diri
+- `Skills.tsx` untuk menampilkan kemampuan
+- `Projects.tsx` untuk menampilkan project
+- `Journey.tsx` untuk menampilkan perjalanan belajar
+- `Contact.tsx` untuk informasi kontak
+- `Footer.tsx` untuk bagian footer
+- `CounterApresiasi.tsx` untuk fitur counter apresiasi
+- `MobileMenu.tsx` untuk menu pada perangkat mobile
+
+## Dynamic Routing
+
+Website menggunakan dynamic routing dari Next.js untuk membuat halaman detail project.
+
+Halaman project menggunakan struktur:
+
+`/proyek/[id]`
+
+Contoh:
+
+- `/proyek/1` → Manajemen Siswa
+- `/proyek/2` → Resep Masakan Nusantara
+- `/proyek/3` → Manajemen Magang
+
+Setiap project memiliki halaman detail yang berbeda berdasarkan ID project.
+
+Jika ID project tidak ditemukan, website akan menampilkan halaman 404.
+
+## Data Project
+
+Data project disimpan secara terpisah di:
+
+`src/data/proyek.ts`
+
+Data tersebut berisi informasi seperti:
+
+- ID project
+- Judul project
+- Kategori
+- Deskripsi singkat
+- Deskripsi lengkap
+- Teknologi yang digunakan
+- Status featured
+
+Dengan cara ini, data project lebih mudah dikelola dan digunakan kembali pada halaman project maupun halaman detail.
+
+## Project yang Dibuat
+
+### 1. Manajemen Siswa
+
+Dashboard untuk mengelola data siswa, kelas, absensi, dan pelanggaran.
+
+Teknologi:
+- Next.js
+- TypeScript
+- Supabase
+
+### 2. Resep Masakan Nusantara
+
+Website yang berisi kumpulan resep masakan khas Nusantara.
+
+Teknologi:
+- Figma
+- UI/UX
+
+### 3. Manajemen Magang
+
+Dashboard untuk mengelola data siswa dan progress kegiatan magang.
+
+Teknologi:
+- Next.js
+- TypeScript
+- Supabase
+
+### 4. Manajemen Kas
+
+Aplikasi untuk mengelola pemasukan, pengeluaran, dan laporan kas.
+
+Teknologi:
+- Figma
+- UI/UX
+
+### 5. Nouve Wear
+
+Website toko online dengan tampilan sederhana dan modern.
+
+Teknologi:
+- Figma
+- UI/UX
+
+## Responsive Design
+
+Website dibuat menggunakan pendekatan responsive sehingga dapat digunakan pada berbagai ukuran layar, mulai dari smartphone hingga desktop.
+
+Tampilan juga disesuaikan agar tetap nyaman digunakan pada ukuran layar kecil.
+
+## Cara Menjalankan Project
+
+Clone repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+git clone https://github.com/rhanzzz1429/portofolio.git
