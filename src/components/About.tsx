@@ -50,7 +50,7 @@ export default function About() {
             </p>
 
             <a
-              href="#contact"
+              href="/tentang"
               className="group inline-flex items-center gap-2 text-sm text-white"
             >
               More about me
