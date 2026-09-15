@@ -6,7 +6,7 @@ export default function NotFound() {
     <main className="flex min-h-screen items-center justify-center bg-[#080808] px-5 text-center text-white">
       <div>
         <p className="text-sm uppercase tracking-[0.3em] text-white/30">
-          Error 404
+          OOPSSS!!!
         </p>
 
         <h1 className="mt-5 text-6xl font-semibold md:text-8xl">
@@ -14,11 +14,11 @@ export default function NotFound() {
         </h1>
 
         <h2 className="mt-5 text-2xl font-medium">
-          Proyek Tidak Ditemukan
+          Nungguin yaaaaaa
         </h2>
 
         <p className="mt-4 text-sm text-white/40">
-          Proyek yang kamu cari tidak tersedia.
+          Proyek yang kamu cari nampaknya sedang berlibur. Tapi jangan khawatir, kamu bisa kembali ke halaman proyek untuk melihat proyek-proyek lainnya.
         </p>
 
         <Link
