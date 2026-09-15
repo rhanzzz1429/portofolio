@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import CounterApresiasi from "@/components/CounterApresiasi";
 
 export default function TentangPage() {
   return (
