@@ -152,3 +152,32 @@ Clone repository:
 
 ```bash
 git clone https://github.com/rhanzzz1429/portofolio.git
+
+## Database
+
+Project ini menggunakan Supabase sebagai database untuk menyimpan data portfolio.
+
+### Table: proyek
+
+| Column | Type | Description |
+|---|---|---|
+| id | int8 | ID unik setiap project |
+| judul | text | Judul project |
+| kategori | text | Kategori project |
+| deskripsi_singkat | text | Deskripsi singkat project |
+| deskripsi_lengkap | text | Deskripsi lengkap project |
+| teknologi | text | Teknologi yang digunakan |
+| featured | bool | Menentukan apakah project ditampilkan sebagai featured |
+
+### RLS Policy
+
+Table `proyek` menggunakan Row Level Security (RLS).
+
+Policy yang dibuat:
+
+- **Name:** `public_read_proyek`
+- **Command:** `SELECT`
+- **Target roles:** `public`
+- **Condition:** `true`
+
+Policy tersebut digunakan agar data project dapat dibaca oleh aplikasi portfolio.
