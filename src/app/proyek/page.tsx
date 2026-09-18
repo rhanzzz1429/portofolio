@@ -1,8 +1,29 @@
 import Link from "next/link";
-import { proyek } from "@/data/proyek";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { supabase } from "@/../lib/supabase";
 
-export default function ProyekPage() {
+export default async function ProyekPage() {
+  const { data: proyek, error } = await supabase
+    .from("proyek")
+    .select("*")
+    .order("id", { ascending: true });
+
+  if (error) {
+    return (
+      <main className="min-h-screen bg-[#080808] px-5 pt-10 pb-28 text-white md:px-8 md:pt-15">
+        <div className="mx-auto max-w-7xl">
+          <h1 className="text-3xl font-semibold">
+            Gagal mengambil data proyek
+          </h1>
+
+          <p className="mt-4 text-red-400">
+            {error.message}
+          </p>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="min-h-screen bg-[#080808] px-5 pt-10 pb-28 text-white md:px-8 md:pt-15">
       <div className="mx-auto max-w-7xl">
@@ -34,46 +55,52 @@ export default function ProyekPage() {
         </div>
 
         <div className="grid gap-5">
-          {proyek.map((item) => (
-            <Link
-              key={item.id}
-              href={`/proyek/${item.id}`}
-              className="group rounded-3xl border border-white/10 bg-white/2 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/4 hover:shadow-lg md:p-10"
-            >
-              <div className="flex items-start justify-between gap-5">
+          {proyek?.map((item) => {
+            const teknologi = item.teknologi
+              ? item.teknologi.split(",").map((tech: string) => tech.trim())
+              : [];
 
-                <div>
-                  <p className="mb-3 text-xs uppercase tracking-[0.2em] text-white/30">
-                    {item.kategori}
-                  </p>
+            return (
+              <Link
+                key={item.id}
+                href={`/proyek/${item.id}`}
+                className="group rounded-3xl border border-white/10 bg-white/2 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/4 hover:shadow-lg md:p-10"
+              >
+                <div className="flex items-start justify-between gap-5">
 
-                  <h2 className="text-3xl font-semibold md:text-5xl">
-                    {item.judul}
-                  </h2>
+                  <div>
+                    <p className="mb-3 text-xs uppercase tracking-[0.2em] text-white/30">
+                      {item.kategori}
+                    </p>
 
-                  <p className="mt-5 max-w-2xl text-sm leading-6 text-white/40">
-                    {item.deskripsiSingkat}
-                  </p>
+                    <h2 className="text-3xl font-semibold md:text-5xl">
+                      {item.judul}
+                    </h2>
 
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {item.teknologi.map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-white/40"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                    <p className="mt-5 max-w-2xl text-sm leading-6 text-white/40">
+                      {item.deskripsi_singkat}
+                    </p>
+
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {teknologi.map((tech: string) => (
+                        <span
+                          key={tech}
+                          className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-white/40"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
 
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/10 transition-all duration-300 group-hover:bg-white group-hover:text-black">
-                  <ArrowUpRight size={20} />
-                </div>
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/10 transition-all duration-300 group-hover:bg-white group-hover:text-black">
+                    <ArrowUpRight size={20} />
+                  </div>
 
-              </div>
-            </Link>
-          ))}
+                </div>
+              </Link>
+            );
+          })}
         </div>
 
       </div>

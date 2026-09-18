@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { proyek } from "@/data/proyek";
+import { supabase } from "@/../lib/supabase";
 
 interface PageProps {
   params: Promise<{
@@ -14,13 +14,21 @@ export default async function DetailProyek({
 }: PageProps) {
   const { id } = await params;
 
-  const project = proyek.find(
-    (item) => item.id === Number(id)
-  );
+  const { data: project, error } = await supabase
+    .from("proyek")
+    .select("*")
+    .eq("id", Number(id))
+    .single();
 
-  if (!project) {
+  if (error || !project) {
     notFound();
   }
+
+  const teknologi = project.teknologi
+    ? project.teknologi
+        .split(",")
+        .map((tech: string) => tech.trim())
+    : [];
 
   return (
     <main className="min-h-screen bg-[#080808] px-5 py-32 text-white md:px-8">
@@ -43,7 +51,7 @@ export default async function DetailProyek({
         </h1>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          {project.teknologi.map((tech) => (
+          {teknologi.map((tech: string) => (
             <span
               key={tech}
               className="rounded-full border border-white/10 px-4 py-2 text-xs text-white/50"
@@ -59,7 +67,7 @@ export default async function DetailProyek({
           </h2>
 
           <p className="mt-6 max-w-3xl text-base leading-8 text-white/50">
-            {project.deskripsiLengkap}
+            {project.deskripsi_lengkap}
           </p>
         </div>
 
