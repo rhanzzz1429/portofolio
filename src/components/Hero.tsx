@@ -6,9 +6,14 @@ import {
   ArrowDown,
   ArrowUpRight,
   Camera,
+  LogIn,
 } from "lucide-react";
 
-export default function Hero() {
+export default function Hero({
+  showAdminLogin,
+}: {
+  showAdminLogin: boolean;
+}) {
   return (
     <section
       id="home"
@@ -73,7 +78,9 @@ export default function Hero() {
           </p>
 
           <p className="mt-2 max-w-3xl text-base leading-8 text-white/45 md:text-lg">
-            Web portfolio of Mukhammad Raihan Apriliansyah, a Software Engineering student at SMKN 1 Pasuruan who aspires to become a web developer.
+            Web portfolio of Mukhammad Raihan Apriliansyah, a Software
+            Engineering student at SMKN 1 Pasuruan who aspires to become a web
+            developer.
           </p>
         </motion.div>
 
@@ -203,6 +210,17 @@ export default function Hero() {
           >
             Contact Me
           </a>
+
+          {/* Admin Login */}
+          {showAdminLogin && (
+            <a
+              href="/admin/login"
+              className="flex items-center gap-2 rounded-full border border-white/15 px-7 py-3.5 text-sm text-white/70 transition hover:border-white/30 hover:text-white"
+            >
+              <LogIn size={17} />
+              Admin Login
+            </a>
+          )}
         </motion.div>
 
         {/* SCROLL */}
