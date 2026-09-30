@@ -2,12 +2,12 @@ import Link from "next/link";
 import {
   LayoutDashboard,
   FolderKanban,
-  LogOut,
 } from "lucide-react";
-
-import { createSupabaseServerClient } from "../../../../lib/supabase-server";
 import { redirect } from "next/navigation";
 
+import { createSupabaseServerClient } from "../../../../lib/supabase-server";
+
+import ExitMenu from "./components/ExitMenu";
 import MobileNavbar from "./components/MobileNavbar";
 
 export default async function DashboardLayout({
@@ -27,17 +27,18 @@ export default async function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* =========================================
-          MOBILE NAVBAR
-      ========================================== */}
+
+      {/* MOBILE NAVBAR */}
       <MobileNavbar logoutAction={logout} />
 
       <div className="flex min-h-screen">
+
         {/* =========================================
             DESKTOP SIDEBAR
         ========================================== */}
         <aside className="fixed inset-y-0 left-0 hidden w-64 border-r bg-white lg:block">
           <div className="flex h-full flex-col">
+
             {/* Header */}
             <div className="border-b px-6 py-5">
               <h1 className="text-xl font-bold text-gray-900">
@@ -56,45 +57,37 @@ export default async function DashboardLayout({
               </p>
 
               <div className="space-y-1">
+
+                {/* Dashboard */}
                 <Link
                   href="/admin"
                   className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100 hover:text-black"
                 >
                   <LayoutDashboard className="h-5 w-5" />
+
                   Dashboard
                 </Link>
 
+                {/* Proyek */}
                 <Link
                   href="/admin/proyek"
                   className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100 hover:text-black"
                 >
                   <FolderKanban className="h-5 w-5" />
+
                   Proyek
                 </Link>
+
               </div>
             </nav>
 
-            {/* Exit */}
+            {/* =====================================
+                EXIT
+            ====================================== */}
             <div className="border-t p-4">
-              <div className="space-y-1">
-                <form action={logout}>
-                  <button
-                    type="submit"
-                    className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-red-600 transition hover:bg-red-50"
-                  >
-                    <LogOut className="h-5 w-5" />
-                    Logout
-                  </button>
-                </form>
-
-                <Link
-                  href="/"
-                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100 hover:text-black"
-                >
-                  ← Back to Portfolio
-                </Link>
-              </div>
+              <ExitMenu logoutAction={logout} />
             </div>
+
           </div>
         </aside>
 
@@ -106,6 +99,7 @@ export default async function DashboardLayout({
             {children}
           </div>
         </main>
+
       </div>
     </div>
   );

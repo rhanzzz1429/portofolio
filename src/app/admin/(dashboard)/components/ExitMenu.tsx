@@ -2,7 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { LogOut, ExternalLink } from "lucide-react";
+import {
+  LogOut,
+  ExternalLink,
+} from "lucide-react";
 
 export default function ExitMenu({
   logoutAction,
@@ -13,7 +16,7 @@ export default function ExitMenu({
 
   return (
     <div className="relative">
-      {/* Icon Exit */}
+      {/* Exit Button */}
       <button
         type="button"
         onClick={() => setOpen(!open)}
@@ -24,7 +27,7 @@ export default function ExitMenu({
         <span>Exit</span>
       </button>
 
-      {/* Menu */}
+      {/* Exit Menu */}
       {open && (
         <div className="absolute bottom-full left-0 mb-2 w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg">
           {/* Logout */}
@@ -42,8 +45,8 @@ export default function ExitMenu({
           {/* Back to Portfolio */}
           <Link
             href="/"
-            className="flex items-center gap-3 border-t border-gray-100 px-4 py-3 text-sm text-gray-700 transition hover:bg-gray-50"
             onClick={() => setOpen(false)}
+            className="flex items-center gap-3 border-t border-gray-100 px-4 py-3 text-sm text-gray-700 transition hover:bg-gray-50"
           >
             <ExternalLink className="h-4 w-4" />
 
