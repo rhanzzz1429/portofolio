@@ -181,3 +181,294 @@ Policy yang dibuat:
 - **Condition:** `true`
 
 Policy tersebut digunakan agar data project dapat dibaca oleh aplikasi portfolio.
+
+---
+## Admin Panel
+
+Pada Pertemuan 04, project portfolio dikembangkan dengan menambahkan halaman Admin Panel yang digunakan untuk mengelola data project.
+
+Admin Panel dilindungi menggunakan Supabase Authentication sehingga hanya pengguna yang sudah login yang dapat mengakses halaman admin.
+
+Halaman admin terdiri dari:
+
+- Dashboard Admin
+- Kelola Proyek
+- Tambah Proyek
+- Edit Proyek
+- Hapus Proyek
+- Admin Login
+- Logout
+- Back to Portfolio
+
+## Supabase Authentication
+
+Admin Panel menggunakan Supabase Authentication untuk proses login.
+
+Admin harus login menggunakan email dan password sebelum dapat mengakses halaman admin.
+
+Jika pengguna belum login, halaman admin akan mengarahkan pengguna ke:
+
+`/admin/login`
+
+Setelah berhasil login, pengguna akan diarahkan ke halaman:
+
+`/admin`
+
+Fitur logout digunakan untuk mengakhiri session admin dan mengarahkan kembali ke halaman login.
+
+## Server Actions
+
+Project ini menggunakan Server Actions dari Next.js untuk menjalankan operasi yang berhubungan dengan database dari sisi server.
+
+Server Actions digunakan untuk:
+
+- Menambahkan project
+- Mengubah project
+- Menghapus project
+- Login admin
+- Logout admin
+
+Dengan Server Actions, operasi CRUD dapat dilakukan tanpa membuat API Route terpisah.
+
+## CRUD Project
+
+Admin Panel memiliki fitur CRUD untuk mengelola data project.
+
+### Create
+
+Admin dapat menambahkan project baru melalui form tambah project.
+
+Data yang dapat ditambahkan meliputi:
+
+- Judul project
+- Kategori
+- Deskripsi singkat
+- Deskripsi lengkap
+- Teknologi
+- Featured
+
+### Read
+
+Admin dapat melihat seluruh data project yang tersimpan di database Supabase melalui halaman:
+
+`/admin/proyek`
+
+### Update
+
+Admin dapat mengubah data project yang sudah tersimpan dengan memilih tombol Edit.
+
+Halaman edit akan menampilkan data project sebelumnya dan dapat diperbarui oleh admin.
+
+### Delete
+
+Admin dapat menghapus project yang sudah tidak diperlukan menggunakan tombol Hapus.
+
+Setelah operasi CRUD dilakukan, data pada halaman admin dan halaman portfolio akan diperbarui menggunakan `revalidatePath`.
+
+## Proteksi Halaman Admin
+
+Halaman Admin Panel menggunakan proteksi route untuk mencegah pengguna yang belum memiliki akses masuk ke halaman admin.
+
+Route yang dilindungi meliputi:
+
+- `/admin`
+- `/admin/proyek`
+- `/admin/proyek/edit/[id]`
+
+Jika pengguna mencoba mengakses halaman admin tanpa autentikasi yang sesuai, pengguna akan diarahkan ke halaman yang sesuai berdasarkan status akses.
+
+## Admin Door
+
+Project ini memiliki fitur tambahan berupa Admin Door sebagai akses tambahan menuju halaman login admin.
+
+Admin Door menggunakan URL khusus:
+
+`/?door=admin-master`
+
+Setelah Admin Door dibuka, sistem menyimpan akses menggunakan cookie `admin_door`.
+
+Tombol **Admin Login** pada halaman portfolio hanya ditampilkan ketika Admin Door sudah aktif.
+
+Fitur ini dibuat sebagai pengembangan tambahan pada project Modul 4.
+
+## Responsive Admin Dashboard
+
+Admin Dashboard dibuat responsive agar dapat digunakan pada berbagai ukuran layar.
+
+Pada desktop, Admin Dashboard menggunakan sidebar yang berisi:
+
+- Dashboard
+- Proyek
+- Exit
+
+Pada perangkat dengan ukuran layar lebih kecil, sidebar berubah menjadi navbar dengan hamburger menu.
+
+Hamburger menu berisi:
+
+- Dashboard
+- Proyek
+- Logout
+- Back to Portfolio
+
+Dengan responsive design, halaman admin tetap dapat digunakan dengan nyaman pada desktop maupun perangkat mobile.
+
+## Exit Menu
+
+Admin Dashboard memiliki menu Exit pada bagian bawah sidebar desktop.
+
+Ketika tombol Exit ditekan, terdapat dua pilihan:
+
+### Logout
+
+Logout digunakan untuk keluar dari akun admin.
+
+Setelah logout, session Supabase akan dihapus dan pengguna diarahkan kembali ke:
+
+`/admin/login`
+
+### Back to Portfolio
+
+Back to Portfolio digunakan untuk kembali ke halaman utama portfolio.
+
+Pilihan ini tidak melakukan logout sehingga session admin tetap tersimpan.
+
+## Struktur Admin
+
+Struktur halaman admin pada project ini adalah:
+
+text
+src
+└── app
+    └── admin
+        ├── (dashboard)
+        │   ├── page.tsx
+        │   ├── layout.tsx
+        │   ├── components
+        │   │   ├── StatCard.tsx
+        │   │   ├── CategoryChart.tsx
+        │   │   ├── FeaturedChart.tsx
+        │   │   ├── RecentProjects.tsx
+        │   │   ├── ExitMenu.tsx
+        │   │   └── MobileNavbar.tsx
+        │   └── proyek
+        │       ├── page.tsx
+        │       └── edit
+        │           └── [id]
+        │               └── page.tsx
+        │
+        └── login
+            └── page.tsx
+
+
+## Modul Pertemuan 05 — Optimasi SEO, Metadata & Performa Website
+
+Pada Pertemuan 05, project portfolio dikembangkan kembali dengan menambahkan optimasi SEO, metadata, Open Graph, sitemap, robots.txt, dan optimasi gambar.
+
+Pengembangan ini bertujuan agar website lebih mudah dikenali oleh mesin pencari, memiliki informasi metadata yang lebih lengkap, serta memiliki performa dan accessibility yang lebih baik.
+
+### SEO dan Metadata
+
+Website menggunakan metadata pada `layout.tsx` untuk memberikan informasi dasar kepada mesin pencari dan platform yang menampilkan link website.
+
+Metadata yang ditambahkan meliputi:
+
+- `metadataBase`
+- `title`
+- `description`
+- `openGraph`
+
+Website juga menggunakan `title template` sehingga judul halaman dapat menyesuaikan dengan halaman yang sedang dibuka.
+
+### Dynamic Metadata
+
+Pada halaman detail project, metadata dibuat secara dinamis menggunakan `generateMetadata`.
+
+Metadata mengambil data project langsung dari Supabase berdasarkan ID project.
+
+Data yang digunakan meliputi:
+
+- Judul project
+- Deskripsi singkat project
+- Open Graph title
+- Open Graph description
+
+Dengan dynamic metadata, setiap halaman detail project memiliki informasi metadata yang berbeda sesuai dengan data project.
+
+### Open Graph Image
+
+Website menggunakan automatic Open Graph image melalui:
+
+`src/app/opengraph-image.tsx`
+
+Open Graph image dibuat menggunakan `ImageResponse` dari `next/og`.
+
+Ukuran gambar yang digunakan adalah:
+
+- Width: 1200px
+- Height: 630px
+
+Open Graph image digunakan ketika halaman website dibagikan melalui platform yang mendukung link preview.
+
+### Robots.txt
+
+Website memiliki file:
+
+`src/app/robots.ts`
+
+File tersebut digunakan untuk memberikan aturan kepada mesin pencari mengenai halaman yang boleh dan tidak boleh diakses.
+
+Konfigurasi yang digunakan:
+
+- Mengizinkan akses ke `/`
+- Melarang crawler mengakses `/admin/`
+- Menyediakan alamat `sitemap.xml`
+
+Dengan konfigurasi tersebut, halaman admin tidak diarahkan untuk di-crawl oleh mesin pencari.
+
+### Sitemap.xml
+
+Website memiliki sitemap yang dibuat melalui:
+
+`src/app/sitemap.ts`
+
+Sitemap berisi URL halaman utama dan halaman project.
+
+Data project diambil secara dinamis dari tabel `proyek` di Supabase sehingga setiap project yang tersedia memiliki URL pada sitemap.
+
+Halaman yang terdapat pada sitemap meliputi:
+
+- Halaman utama
+- Halaman semua project
+- Halaman detail setiap project
+
+Contoh URL:
+
+- `/`
+- `/proyek`
+- `/proyek/1`
+- `/proyek/2`
+- `/proyek/3`
+
+dan halaman project lainnya sesuai dengan data yang tersedia di Supabase.
+
+### Optimasi Gambar
+
+Untuk meningkatkan performa website, gambar menggunakan component `Image` dari Next.js melalui:
+
+`next/image`
+
+Penggunaan `next/image` diterapkan pada gambar utama portfolio.
+
+Gambar juga diberikan `alt` yang deskriptif untuk membantu accessibility.
+
+Contoh:
+
+```tsx
+<Image
+  src="/hanz.png"
+  alt="Foto profil Mukhammad Raihan Apriliansyah"
+  fill
+  priority
+  className="object-cover"
+  sizes="(max-width: 768px) 250px, 270px"
+/>

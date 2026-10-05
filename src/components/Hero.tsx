@@ -131,7 +131,7 @@ export default function Hero({
           <div className="relative aspect-4/5 overflow-hidden rounded-3xl border-2 border-white bg-[#151515] shadow-2xl">
             <Image
               src="/hanz.png"
-              alt="Hanz"
+              alt="Foto Profil Mukhammad Raihan Apriliansyah"
               fill
               priority
               className="object-cover"

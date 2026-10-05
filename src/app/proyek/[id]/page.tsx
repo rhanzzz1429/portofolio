@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -7,6 +8,37 @@ interface PageProps {
   params: Promise<{
     id: string;
   }>;
+}
+
+// Dynamic Metadata
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { id } = await params;
+
+  const { data: project } = await supabase
+    .from("proyek")
+    .select("judul, deskripsi_singkat")
+    .eq("id", Number(id))
+    .single();
+
+  if (!project) {
+    return {
+      title: "Proyek Tidak Ditemukan",
+      description: "Proyek yang kamu cari tidak ditemukan.",
+    };
+  }
+
+  return {
+    title: project.judul,
+    description: project.deskripsi_singkat,
+
+    openGraph: {
+      title: project.judul,
+      description: project.deskripsi_singkat,
+      type: "website",
+    },
+  };
 }
 
 export default async function DetailProyek({
