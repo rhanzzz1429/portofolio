@@ -21,7 +21,7 @@ export default function Image() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0b5cff",
+          background: "#000000",
           color: "white",
           padding: "60px",
           textAlign: "center",
